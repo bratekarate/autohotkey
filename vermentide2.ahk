@@ -68,7 +68,7 @@ SpoilsOfWar()
     OpenBoxesFunc.Call()
     if(Stop = False)
     {
-        SetTimer, % OpenBoxesFunc, 1000 
+        SetTimer, % OpenBoxesFunc, 2000 
     }
 }
 
@@ -183,9 +183,11 @@ WaitForImageAndDo(ImageInput, X1, Y1, X2, Y2, Callback)
                 Searching := False
                 break
             case 2:        
-                MsgBox, Failed to open image file or malformed options
+                MsgBox, % "Failed to open image file or malformed options"
                 Searching := False
                 break
+            default:
+                continue
             }
         }
         Sleep 50
