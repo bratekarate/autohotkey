@@ -26,10 +26,10 @@ global PressTifVermActiveFunc := Func("DoIfWinActive").Bind("ahk_class main_wind
 
 ; Hotkeys active inside Vermintide 2.
 #IfWinActive ahk_class main_window
-^t::AutoTag()
-^b::SpoilsOfWar()
-^i::EquipStrongestItems()
-^s::SelectWeakestSalvageItems()
+^+t::AutoTag()
+^+b::SpoilsOfWar()
+^+i::EquipStrongestItems()
+^+s::SelectWeakestSalvageItems()
 #IfWinActive
 
 ; Global Hotkeys
