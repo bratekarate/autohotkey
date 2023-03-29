@@ -5,6 +5,8 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetTitleMatchMode, RegEx
 
+global CAPCOM_REGEX := "^CAPCom.*"
+
 NoOp() {
 }
 
@@ -57,17 +59,26 @@ WindowExec(Win) {
     UnBlocker()
 }
 
+ExitError() {
+    TrayTip Not Found, Could not find window to refresh
+    Exit 1
+}
+
 WindowRefresh() {
-    if Win := WinExist("^CAPCom.*") {
+    if Win := WinExist(CAPCOM_REGEX) {
         TrayTip Refresh, Warning`, refreshing in 30s
         Sleep 30000
         WindowExec(Win)
     } else {
-        TrayTip Not Found, Could not find window to refresh
+        ExitError()
     }
 }
 
 WindowRefreshFn := Func("WindowRefresh")
-SetTimer, % WindowExecFn, 570000 ; Every 9.5 Minutes
+SetTimer, % WindowRefreshFn, 570000 ; Every 9.5 Minutes
 
-WindowExec()
+if Win := WinExist(CAPCOM_REGEX) {
+    WindowExec(Win)
+} else {
+    ExitError()
+}
